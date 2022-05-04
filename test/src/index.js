@@ -19,6 +19,7 @@ function App() {
 							{
 								type: 'text',
 								title: 'First Name',
+								required: true,
 								bindTo: 'first-name'
 							},
 							{
@@ -82,6 +83,7 @@ function App() {
 	return (
 		<div className='container pt-3'>
 			<SimpleReactForm {...formDefinition} />
+			{JSON.stringify(data, null, 2)}
 		</div>
 	);
 }

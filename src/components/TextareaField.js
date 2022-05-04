@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 
 let idCounter = 0;
 
-function TextareaField({ id = `textarea-field-${idCounter++}`, title, required = false, helpText, bindTo, data = {}, updateData = () => { } }) {
+function TextareaField({ id = `textarea-field-${idCounter++}`, title, required = false, helpText, bindTo, data, updateData }) {
 	const refs = React.createRef();
 	useEffect(() => {
-		if (bindTo) {
+		if (bindTo && data) {
 			const element = refs.current;
 			element.value = data[bindTo] || '';
 
-			const inputHandler = () => void updateData(bindTo, element.value);
-			element.addEventListener('input', inputHandler);
-
-			return () => void element.removeEventListener('input', inputHandler);
+			if (updateData) {
+				const inputHandler = () => void updateData(bindTo, element.value);
+				element.addEventListener('input', inputHandler);
+				return () => void element.removeEventListener('input', inputHandler);
+			}
 		}
-  });
+	});
 
 	const helpTextId = helpText && `${id}-help`;
 	return (

@@ -17,7 +17,7 @@ function Field({ type = 'text', types = {}, className = 'col', ...props }) {
 
 	return (
 		<div className={['mb-3', className].join(' ')}>
-			{React.createElement(component, props)}
+			{React.createElement(component, { ...props })}
 		</div>
 	);
 }

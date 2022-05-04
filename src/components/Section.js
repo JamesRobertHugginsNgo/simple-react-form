@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-key */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +11,7 @@ function Section({ id, title, rows = [], data, updateData }) {
 			</div>
 
 			<div className="card-body">
-				{rows.map((row) => (<Row data={data} updateData={updateData} {...row} />))}
+				{rows.map((row) => (<Row data={data} updateData={updateData} key={JSON.stringify(row)} {...row} />))}
 			</div>
 		</div>
 	);
