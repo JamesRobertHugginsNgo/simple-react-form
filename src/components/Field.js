@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 import DropdownField from './DropdownField';
 import TextareaField from './TextareaField';
 import TextField from './TextField';
 
-function Field({ type = 'text', types = {}, className = 'col', ...props }) {
+function Field({ type = 'text',  className = 'col', types = {}, ...props }) {
 	const allTypes = {
 		dropdown: DropdownField,
 		text: TextField,
@@ -24,7 +25,7 @@ function Field({ type = 'text', types = {}, className = 'col', ...props }) {
 
 Field.propTypes = {
 	type: PropTypes.string,
-	types: PropTypes.objectOf(PropTypes.component),
+	types: PropTypes.object,
 	className: PropTypes.string
 };
 

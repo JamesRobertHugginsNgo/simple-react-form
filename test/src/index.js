@@ -36,18 +36,18 @@ function App() {
 								title: 'Birth Month',
 								choices: [
 									{ text: '- Select - ', value: '' },
-									{ text: 'January' },
-									{ text: 'February' },
-									{ text: 'March' },
-									{ text: 'April' },
-									{ text: 'May' },
-									{ text: 'June' },
-									{ text: 'July' },
-									{ text: 'August' },
-									{ text: 'September' },
-									{ text: 'October' },
-									{ text: 'November' },
-									{ text: 'December' }
+									'January',
+									'February',
+									'March',
+									'April',
+									'May',
+									'June',
+									'July',
+									'August',
+									'September',
+									'October',
+									'November',
+									'December'
 								],
 								bindTo: 'birth-month'
 							}
@@ -76,8 +76,9 @@ function App() {
 				]
 			}
 		],
-		data,
-		updateData: (bindTo, value) => void setData({ ...data, [bindTo]: value })
+		data: { ...data },
+		updateData: (bindTo, value) => void setData({ ...data, [bindTo]: value }),
+		types: {}
 	};
 
 	return (
