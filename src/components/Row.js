@@ -1,12 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Field from './Field';
+import TextField from './TextField';
+import TextareaField from './TextareaField';
 
-function Row({ id, fields = [], types, data, updateData }) {
+function Row({
+	id,
+	fields = [],
+	data,
+	updateData,
+	types
+}) {
+	const componentTypes = Object.assign({
+		'text': TextField,
+		'textarea': TextareaField
+	}, types);
+
 	return (
 		<div className='row' id={id}>
-			{fields.map((field) => (<Field types={types} data={data} updateData={updateData} key={JSON.stringify(field)} {...field} />))}
+			{fields.map(({ type = 'text', ...field }, key) => React.createElement(
+					componentTypes[type] || componentTypes['text'],
+					{
+						data,
+						updateData,
+						types,
+						key,
+						...field
+					}
+				))}
 		</div>
 	);
 }
@@ -14,9 +35,9 @@ function Row({ id, fields = [], types, data, updateData }) {
 Row.propTypes = {
 	id: PropTypes.string,
 	fields: PropTypes.array,
-	types: PropTypes.object,
 	data: PropTypes.object,
-	updateData: PropTypes.func
+	updateData: PropTypes.func,
+	types: PropTypes.object
 };
 
 export default Row;

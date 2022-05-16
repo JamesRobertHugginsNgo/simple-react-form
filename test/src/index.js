@@ -5,8 +5,8 @@ import SimpleReactForm from '../../src/index.js';
 
 function App() {
 	const [data, setData] = useState({
-		'test-1': 'THIS IS A TEST',
-		'test-2': 'THIS IS A TEST'
+		'first-name': 'First Name',
+		'last-name': 'Last Name'
 	});
 
 	const formDefinition = {
@@ -20,36 +20,26 @@ function App() {
 								type: 'text',
 								title: 'First Name',
 								required: true,
-								bindTo: 'first-name'
+								bindTo: 'first-name',
+								helpText: 'Your first name'
 							},
 							{
 								type: 'text',
 								title: 'Last Name',
-								bindTo: 'last-name'
+								bindTo: 'last-name',
+								helpText: 'Your last name'
 							}
 						]
 					},
 					{
 						fields: [
 							{
-								type: 'dropdown',
-								title: 'Birth Month',
-								choices: [
-									{ text: '- Select - ', value: '' },
-									'January',
-									'February',
-									'March',
-									'April',
-									'May',
-									'June',
-									'July',
-									'August',
-									'September',
-									'October',
-									'November',
-									'December'
-								],
-								bindTo: 'birth-month'
+								type: 'text',
+								title: 'Full Name',
+								helpText: 'Calculated field for your full name',
+								visible: { "!==": [{ "var": "last-name" }, ""] },
+								readOnly: true,
+								bindTo: 'full-name'
 							}
 						]
 					}
@@ -62,12 +52,16 @@ function App() {
 						fields: [
 							{
 								type: 'text',
-								title: 'TEXT FIELD',
+								title: 'Text Field',
 								bindTo: 'testfield'
-							},
+							}
+						]
+					},
+					{
+						fields: [
 							{
 								type: 'textarea',
-								title: 'TEXTAREA FIELD',
+								title: 'Textarea Field',
 								helpText: 'TEXTAREA HELP TEXT',
 								bindTo: 'testareafield'
 							}
@@ -76,8 +70,16 @@ function App() {
 				]
 			}
 		],
-		data: { ...data },
-		updateData: (bindTo, value) => void setData({ ...data, [bindTo]: value }),
+		data,
+		updateData: (bindTo, value) => {
+			if (bindTo) {
+				setData({
+					...data,
+					'full-name': `${data['first-name']} ${data['last-name']}`,
+					[bindTo]: value
+				});
+			}
+		},
 		types: {}
 	};
 

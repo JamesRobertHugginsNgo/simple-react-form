@@ -13,17 +13,14 @@ function DropdownField({ id = `dropdown-field-${idCounter++}`, title, choices = 
 
 			const value = data[bindTo] || '';
 			if (element.value !== value) {
-				console.log('DROPDOWN FIELD / SET VALUE');
 				element.value = value;
 			}
 
 			if (updateData) {
-				console.log('DROPDOWN FIELD / ADD INPUT EVENT LISTENER');
 				const inputHandler = () => void updateData(bindTo, element.value);
 				element.addEventListener('input', inputHandler);
 
 				return () => {
-					console.log('DROPDOWN FIELD / REMOVE INPUT EVENT LISTENER');
 					element.removeEventListener('input', inputHandler);
 				};
 			}

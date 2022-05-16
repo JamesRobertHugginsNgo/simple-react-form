@@ -1,32 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-import DropdownField from './DropdownField';
-import TextareaField from './TextareaField';
-import TextField from './TextField';
-
-function Field({ type = 'text',  className = 'col', types = {}, ...props }) {
-	const allTypes = {
-		dropdown: DropdownField,
-		text: TextField,
-		textarea: TextareaField,
-		...types
-	};
-
-	const component = allTypes[type] || allTypes['text'];
-
+function Field({
+	className = 'col',
+	id,
+	title,
+	required = false,
+	helpText,
+	children
+}) {
 	return (
-		<div className={['mb-3', className].join(' ')}>
-			{React.createElement(component, { ...props })}
+		<div className={['mb-3', className].join(' ')} id={`${id}-element`}>
+			<label htmlFor={id} className='form-label'>
+				{title} {!required && (<span className='form-text'>Optional</span>)}
+			</label>
+			{children}
+			{helpText && (
+				<div id={`${id}-help`} className="form-text">
+					{helpText}
+				</div>
+			)}
 		</div>
 	);
 }
 
 Field.propTypes = {
-	type: PropTypes.string,
-	types: PropTypes.object,
-	className: PropTypes.string
+	className: PropTypes.string,
+	id: PropTypes.string,
+	title: PropTypes.string,
+	required: PropTypes.bool,
+	helpText: PropTypes.string,
+	children: PropTypes.node
 };
 
 export default Field;
