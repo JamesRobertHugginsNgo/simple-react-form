@@ -13,6 +13,7 @@ function TextareaField({
 	title,
 	required = false,
 	helpText,
+	rows,
 	visible = true,
 	readOnly = false,
 	bindTo,
@@ -51,6 +52,7 @@ function TextareaField({
 				name={id}
 				type="text"
 				required={required}
+				rows={rows}
 				readOnly={readOnlyValue}
 				className="form-control"
 				id={id}
@@ -67,7 +69,7 @@ TextareaField.propTypes = {
 	title: PropTypes.string,
 	required: PropTypes.bool,
 	helpText: PropTypes.string,
-	valueRules: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
+	rows: PropTypes.number,
 	visible: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
 	readOnly: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
 	bindTo: PropTypes.string,

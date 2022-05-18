@@ -27,6 +27,7 @@ function Section({
 				{rows.map(({ type = 'row', ...row }, key) => React.createElement(
 					componentTypes[type] || componentTypes['row'],
 					{
+						type,
 						data,
 						updateData,
 						types,

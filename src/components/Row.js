@@ -13,6 +13,8 @@ function Row({
 }) {
 	const componentTypes = Object.assign({
 		'text': TextField,
+		'number': TextField,
+		'email': TextField,
 		'textarea': TextareaField
 	}, types);
 
@@ -21,6 +23,7 @@ function Row({
 			{fields.map(({ type = 'text', ...field }, key) => React.createElement(
 					componentTypes[type] || componentTypes['text'],
 					{
+						type,
 						data,
 						updateData,
 						types,

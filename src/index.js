@@ -17,6 +17,7 @@ function SimpleReactForm({
 	return React.createElement(
 		componentTypes[type] || componentTypes['form'],
 		{
+			type,
 			data,
 			updateData,
 			types,

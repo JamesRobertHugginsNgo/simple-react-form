@@ -9,6 +9,19 @@ function App() {
 		'last-name': 'Last Name'
 	});
 
+	const calculateData = (data) => {
+		data['full-name'] = `${data['first-name']} ${data['last-name']}`;
+		delete data['result'];
+		data['result'] = JSON.stringify(data, null, 2);
+		return data;
+	};
+
+	calculateData(data);
+
+	const updateData = (bindTo, value) => {
+		setData(calculateData({ ...data, [bindTo]: value }));
+	};
+
 	const formDefinition = {
 		sections: [
 			{
@@ -46,6 +59,29 @@ function App() {
 				]
 			},
 			{
+				title: 'Text Field',
+				rows: [
+					{
+						fields: [
+							{
+								type: 'text',
+								title: 'Text Text Field',
+								bindTo: 'text-text-field'
+							}
+						]
+					},
+					{
+						fields: [
+							{
+								type: 'number',
+								title: 'Number Text Field',
+								bindTo: 'number-text-field'
+							}
+						]
+					}
+				]
+			},
+			{
 				title: 'SECTION TITLE',
 				rows: [
 					{
@@ -68,25 +104,32 @@ function App() {
 						]
 					}
 				]
+			},
+			{
+				title: 'Result',
+				rows: [
+					{
+						fields: [
+							{
+								type: 'textarea',
+								title: 'Data',
+								required: true,
+								rows: 10,
+								bindTo: 'result'
+							}
+						]
+					}
+				]
 			}
 		],
 		data,
-		updateData: (bindTo, value) => {
-			if (bindTo) {
-				setData({
-					...data,
-					'full-name': `${data['first-name']} ${data['last-name']}`,
-					[bindTo]: value
-				});
-			}
-		},
+		updateData,
 		types: {}
 	};
 
 	return (
 		<div className='container pt-3'>
 			<SimpleReactForm {...formDefinition} />
-			{JSON.stringify(data, null, 2)}
 		</div>
 	);
 }

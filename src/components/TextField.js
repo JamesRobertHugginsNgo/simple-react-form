@@ -8,6 +8,7 @@ import Field from './Field';
 let idCounter = 0;
 
 function TextField({
+	type = 'text',
 	id = `text-field-${idCounter++}`,
 	className,
 	title,
@@ -49,7 +50,7 @@ function TextField({
 		>
 			<input
 				name={id}
-				type="text"
+				type={type}
 				required={required}
 				readOnly={readOnlyValue}
 				className="form-control"
@@ -62,6 +63,7 @@ function TextField({
 }
 
 TextField.propTypes = {
+	type: PropTypes.string,
 	className: PropTypes.string,
 	id: PropTypes.string,
 	title: PropTypes.string,

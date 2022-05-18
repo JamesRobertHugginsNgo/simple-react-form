@@ -19,6 +19,7 @@ function Form({
 			{sections.map(({ type = 'section', ...section }, key) => React.createElement(
 				componentTypes[type] || componentTypes['section'],
 				{
+					type,
 					data,
 					updateData,
 					types,

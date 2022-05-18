@@ -12,7 +12,7 @@ function Field({
 	return (
 		<div className={['mb-3', className].join(' ')} id={`${id}-element`}>
 			<label htmlFor={id} className='form-label'>
-				{title} {!required && (<span className='form-text'>Optional</span>)}
+				{title} {!required && (<span className='form-text'>(Optional)</span>)}
 			</label>
 			{children}
 			{helpText && (
